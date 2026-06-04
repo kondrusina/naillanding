@@ -29,19 +29,27 @@
   // ---- Mobile nav toggle
   const toggle = document.querySelector('.nav-toggle');
   const siteNav = document.querySelector('.site-nav');
+  
   if (toggle && siteNav) {
     toggle.addEventListener('click', () => {
       const expanded = toggle.getAttribute('aria-expanded') === 'true';
       toggle.setAttribute('aria-expanded', String(!expanded));
       siteNav.classList.toggle('is-open', !expanded);
       toggle.setAttribute('aria-label', expanded ? 'Открыть меню' : 'Закрыть меню');
+      
+      // Блокируем скролл страницы под открытым меню
+      document.body.style.overflow = expanded ? '' : 'hidden';
     });
+    
     // Закрываем меню при клике на ссылку
     siteNav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         toggle.setAttribute('aria-expanded', 'false');
         siteNav.classList.remove('is-open');
         toggle.setAttribute('aria-label', 'Открыть меню');
+        
+        // Возвращаем скролл при переходе по ссылке
+        document.body.style.overflow = '';
       });
     });
   }
