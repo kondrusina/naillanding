@@ -1,0 +1,17 @@
+{
+    "name": "tonko-krepko/landing",
+    "description": "Backend для лендинга курса «Тонко-Крепко»",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.1",
+        "ext-pdo_sqlite": "*",
+        "ext-curl": "*",
+        "stripe/stripe-php": "^14.0",
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "config": {
+        "platform-check": false,
+        "sort-packages": true
+    }
+}
