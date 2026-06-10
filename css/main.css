@@ -413,18 +413,23 @@ a { color: inherit; text-decoration: none; }
 */
 .hero-marquee {
   position: relative;
-  z-index: 2;            /* над декоративным бутыльком */
+  z-index: 2;
   border-top: 1px solid var(--c-line);
   border-bottom: 1px solid var(--c-line);
   overflow: hidden;
   padding-block: 1.15rem;
   background: var(--c-bg-soft);
+  -webkit-overflow-scrolling: touch;
+  transform: translateZ(0); /* iOS Safari fix */
 }
 
 .hero-marquee-track {
   display: flex;
   width: max-content;
   animation: marquee 60s linear infinite;
+  will-change: transform;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
 .hero-marquee-set {
@@ -2743,5 +2748,10 @@ a { color: inherit; text-decoration: none; }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .hero-marquee-track { animation: none; }
+  /* Бегущую строку замедляем, но не останавливаем — иначе на iPhone с включённым
+     «Уменьшить движение» она стоит намертво */
+  .hero-marquee-track {
+    animation-duration: 120s !important;
+    animation-iteration-count: infinite !important;
+  }
 }
